@@ -84,4 +84,4 @@ void buildLCP() {
 // memset(LCP, 0, sizeof(LCP));  setting all index of LCP to zero
 // buildSA(); for building suffix array
 // buildLCP(); for building LCP array
-// LCP is the longest common prefix with the next suffix here
+// LCP is the longest common prefix with the previous suffix here
