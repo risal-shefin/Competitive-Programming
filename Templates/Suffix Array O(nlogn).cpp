@@ -79,9 +79,10 @@ void buildLCP() {
     LCP[i] = PLCP[SA[i]];
     // put the permuted LCP to the correct position
 }
-// n = string length
+// n = string length + 1
 // s = the string
 // memset(LCP, 0, sizeof(LCP));  setting all index of LCP to zero
 // buildSA(); for building suffix array
 // buildLCP(); for building LCP array
 // LCP is the longest common prefix with the previous suffix here
+// SA[0] holds the empty suffix "\0".
