@@ -151,7 +151,7 @@ void compute_lcp() {
 int main()
 {
 
-    strcpy(s, "banana");   // s = "banana"
+    strcpy(s, "$banana$");   // for s = "banana"
     int len = strlen(s);
 
     prep_string();
@@ -159,10 +159,10 @@ int main()
     compute_reverse_sa();
     compute_lcp();
 
-    // SA[0] holds the empty suffix "\0".
-    for (int i=1;i<=len;i++) printf("%d ",SA[i]);
+    // SA[0],SA[1],SA[2] holds the suffices starting with "\0" or "$".
+    for (int i=3;i<=len;i++) printf("%d ",SA[i]);
     printf("\n");
-    for (int i=1;i<=len;i++) printf("%d ",LCP[i]);
+    for (int i=3;i<=len;i++) printf("%d ",LCP[i]);
     printf("\n");
 
     return 0;
