@@ -1,4 +1,4 @@
-/// O(n^2logn per query if matrix is fixed for all queries)
+/// O(n^2logn) per query if matrix is fixed for all queries
  
 #define ll long long
 const ll MOD = 1e9 + 7;
