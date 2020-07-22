@@ -29,7 +29,7 @@ bool exist[4*sz];
 // Thus query'll be optimized by not traversing
 // the non-updated nodes.
 
-void add(ll lo, ll hi, Line &line, ll node)
+void add(ll lo, ll hi, Line line, ll node)
 {
     // To initialize the tree, add this line:
     // if(!exist[node]) tree[node] = {m, c};
