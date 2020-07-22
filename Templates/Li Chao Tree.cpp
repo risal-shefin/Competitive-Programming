@@ -3,9 +3,9 @@
 
  * Adding line (y = mx+c) : O(logn)
  * Query : O(logn)
-
- * To find minimum, use f1(x) < f2(x) in update & query.
- * To find maximum, use f1(x) > f2(x) in update & query.
+ 
+ * To find minimum, use f1(x) < f2(x), min in update & query.
+ * To find maximum, use f1(x) > f2(x), max in update & query.
 
  * The line of tree[node] in range [lo, hi] represents
    that this line gives the best result for point [x, y] range,
