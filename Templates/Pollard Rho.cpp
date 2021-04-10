@@ -22,4 +22,4 @@ ll pollard_rho(ll n)  //pollard rho implementation
 }
 
 /// srand(time(NULL);   // setting seed for rand() at the start of main function
-/// long long divisor = pollard_rho(n);   // to find any one divisor of n
+/// long long divisor = pollard_rho(n);   // to find one (any) divisor of n
