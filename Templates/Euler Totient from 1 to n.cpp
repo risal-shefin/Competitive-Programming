@@ -11,24 +11,22 @@ using namespace std;
 
 ll prime[sz + 9], etf[sz + 9];
 
-void computeTotient()
-
-{
+void computeTotient() {
     etf[1] = 1;
-	for(ll i = 2; i <= sz; i++){
-		if(!prime[i]){
-			etf[i] = i - 1;
-			for(ll j = 1; j * i <= sz; j++)
-				if(!prime[j*i])prime[j*i] = i;
-		}
-		else{
-			etf[i] = etf[prime[i]] * etf[ i/prime[i] ];
-			ll g = 1;
-			if(i % (prime[i]*prime[i]) == 0) g = prime[i];
-			etf[i] *= g;
-			etf[i] /= etf[g];
-		}
-	}
+    for(ll i = 2; i <= sz; i++){
+        if(!prime[i]){
+            etf[i] = i - 1;
+            for(ll j = 1; j * i <= sz; j++)
+                if(!prime[j*i])prime[j*i] = i;
+        }
+        else{
+            etf[i] = etf[prime[i]] * etf[ i/prime[i] ];
+            ll g = 1;
+            if(i % (prime[i]*prime[i]) == 0) g = prime[i];
+            etf[i] *= g;
+            etf[i] /= etf[g];
+        }
+    }
 }
 
 // Driver program to test above function
