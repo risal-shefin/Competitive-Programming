@@ -25,6 +25,7 @@ for(int mask = 0; mask < (1<<N); mask++){
 	F[mask] = dp[mask][N];
 }
 
+
 /// memory optimized, super easy to code.
 for(int i = 0; i<(1<<N); i++)
 	F[i] = A[i];
