@@ -2,9 +2,7 @@
 /// the function F(x) = Sum of all A[i] such that x&i = i, i.e., i is a subset of x.
 /// It means i is the subset bitmask of the bitmask of x.
 
-
 /// Suboptimal Bruteforce Method O(3^n):
-
 // iterate over all the masks
 for (int mask = 0; mask < (1<<n); mask++) {
 	F[mask] = A[0];
@@ -14,11 +12,8 @@ for (int mask = 0; mask < (1<<n); mask++) {
     }
 }
 
-
-
 /// Two DP methods O(n*2^n):
 /// iterative version
-
 for(int mask = 0; mask < (1<<N); mask++){
 	dp[mask][0] = A[mask];	//handle base case separately (leaf states)
 	for(int i = 0;i < N; i++){
@@ -29,8 +24,6 @@ for(int mask = 0; mask < (1<<N); mask++){
 	}
 	F[mask] = dp[mask][N];
 }
-
-
 
 /// memory optimized, super easy to code.
 for(int i = 0; i<(1<<N); i++)
