@@ -44,17 +44,17 @@ void dfs_hld(ll u, ll p)
 
 ll LCA(ll u, ll v)
 {
-	if(depth[u] < depth[v]) swap(u,v);
-	ll diff = depth[u] - depth[v];
-	for(ll i = 0; i < LN; i++) if( (diff>>i)&1 ) u = pa[i][u];
-	if(u == v) return u;
-	for(ll i = LN-1; i >= 0; i--) {
+    if(depth[u] < depth[v]) swap(u,v);
+    ll diff = depth[u] - depth[v];
+    for(ll i = 0; i < LN; i++) if( (diff>>i)&1 ) u = pa[i][u];
+    if(u == v) return u;
+    for(ll i = LN-1; i >= 0; i--) {
         if(pa[i][u] != pa[i][v]) {
             u = pa[i][u];
             v = pa[i][v];
         }
-	}
-	return pa[0][u];
+    }
+    return pa[0][u];
 }
 
 void build(ll lo, ll hi, ll node)
