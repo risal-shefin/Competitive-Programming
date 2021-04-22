@@ -29,13 +29,13 @@ void ConvexHull(ll n) {
     /// Building lower hull
     for(ll i = 0; i < n; i++) {
         while (sz > 1 && cross(hull[sz - 2], hull[sz - 1], p[i]) <= 0) --sz;   /// use < 0 for taking co-linear points
-            hull[sz++] = p[i];
+        hull[sz++] = p[i];
     }
 
     /// Building upper hull
     for(int i = n - 2, j = sz + 1; i >= 0; i--) {
         while (sz >= j && cross(hull[sz - 2], hull[sz - 1], p[i]) <= 0) --sz;  /// use < 0 for taking co-linear points
-            hull[sz++] = p[i];
+        hull[sz++] = p[i];
     }
 
     /// last point is same as first point. so, sz--
