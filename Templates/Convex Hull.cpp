@@ -26,13 +26,13 @@ void ConvexHull(ll n) {
     sz = 0;
     sort(p, p + n, cmp);
 
-    /// Building upper hull
+    /// Building lower hull
     for(ll i = 0; i < n; i++) {
         while (sz > 1 && cross(hull[sz - 2], hull[sz - 1], p[i]) <= 0) --sz;   /// use < 0 for taking co-linear points
             hull[sz++] = p[i];
     }
 
-    /// Building lower hull
+    /// Building upper hull
     for(int i = n - 2, j = sz + 1; i >= 0; i--) {
         while (sz >= j && cross(hull[sz - 2], hull[sz - 1], p[i]) <= 0) --sz;  /// use < 0 for taking co-linear points
             hull[sz++] = p[i];
