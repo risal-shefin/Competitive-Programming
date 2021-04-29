@@ -1,5 +1,6 @@
 /*
  * Dominator Tree Implementation
+ * Source node of the DAG is the root of the Tree.
  * If any Ancestor of u is removed, u will be
    disconnected from the source in the DAG.
  * If u is removed, all the nodes in the subtree
