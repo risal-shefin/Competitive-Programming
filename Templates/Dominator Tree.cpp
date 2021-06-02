@@ -13,7 +13,7 @@ ll depth[sz], pa[LN][sz];
 
 /*
  * dag :  stores the DAG
- * som : stores the Dominator Tree
+ * dom : stores the Dominator Tree
  * par[u] : direct parent of u in the DAG
  * tops : stores the  ascending topsort order of the DAG
 */
