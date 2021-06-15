@@ -1,5 +1,5 @@
 /* Li Chao Tree Template
- * Can be used solve Convex Hull Trick problems
+ * Can be used to solve Convex Hull Trick problems
 
  * Adding line (y = mx+c) : O(logn)
  * Query : O(logn)
