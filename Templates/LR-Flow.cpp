@@ -41,6 +41,8 @@ struct LRFlow {
     }
 };
 // LRFlow lrf = LRFlow();
+// lrf.init(n); to initialize with n nodes
 // lrf.addEdgeLR(u, v, l, r, i); edge_i from u to v. Capacity = [L,R]
-// lrf.maxFlowLR(s, t); max flow from s to t satisfying [l_i, r_i] ranges
-// For maxFlow(s, t); func, use any efficient max flow algo.
+// lrf.maxFlowLR(s, t); max flow from s to t satisfying [l_i, r_i] range flows of edges
+// g[], maxFlow(s, t), addEdge(u, v, c) are from typical max flow algo.
+
