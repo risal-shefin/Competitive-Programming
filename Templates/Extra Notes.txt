@@ -1,0 +1,87 @@
+// Collected from various sources
+
+1.if n=(a^p)*(b^q)*(c^r), Sum of Divisors, S.O.D = (a^(p+1)-1)/(a-1)*(b^(q+1)-1)/(b-1)*(c^(r+1)-1)/(c-1)
+
+2.সমান্তর ধারা: nতম পদ=a+(n-1)d, sum=(n{2a+(n-1)d})/2
+
+3. গুণোত্তর ধারা: nতম পদ=ar^(n-1), sum=(a(r^n-1))/(r-1)
+
+4. Catalan Numbers: 1, 1, 2, 5, 14, 42, 132…..
+    Cn = (2n)!/(n+1)!n! ; n >= 0
+    
+5. Suppose, there are n unlabelled objects to be placed into k bins, ways= (n-1)C(k-1)
+
+6. Statement of 5no. and empty bins are valid, ways= (n+k-1)C(k-1)
+
+7. Sine Rule of a Triangle: a/sinA=b/sinB=c/sinC
+
+8. Cosine Rule of a Triangle: cosA=(b^2+c^2-a^2)/2bc
+
+9. Surface Area & Volumes:
+    Sphere: SA =4πr^2, V=4/3 πr^3
+    Cone: SA=πr^2+πrs, V=1/3 πr^2 h, [side,s= √(h^2+r^2)]
+    Cylinder: SA=2πr^2+2πrh, V=πr^2 h
+    Cuboid: SA=2(wh+lw+lh), V=lwh
+    Trapezoid: Area=1/2 (b1+b2)h
+    
+10. Area of a Circle Sector=θ/360 πr^2  (in degree)
+
+11. Number of permutations of n elements with k disjoint cycles
+= Str1(n,k) = (n-1) * Str1(n-1,k) + Str1(n-1,k-1)
+
+12. n! = Sum(Str1(n,k)) (for all 0 <= k <= n).
+
+13. Ways to partition n labelled objects into k unlabeled subsets = Str2(n,k) = k * Str2(n-1,k) + Str2(n-1,k-1)
+
+14. Parity of Str2(n,k) : ((n-k) & Floor((k-1)/2))==0)
+
+15. Ways to partition n labelled objects into k unlabelled subsets, with each subset containing 
+
+at least r elements : SR(n,k) = k * SR(n-1,k) + C(n-1,r-1) * SR(n-r,k-1)
+
+16. Number of ways to partition n labelled objects 1,2,3, ... n into k non-empty subsets 
+so that for any integers i and j in a given subset |i-j| >= d : Str2(n-d+1, k-d+1), n >= k >= d
+
+17. Total number of paths from point P(x1, y1) 
+to point Q(x2, y2) where x2 >= x1 and y2 >= y1 :
+Let x = x2 - x1 and y = y2 - y1. Then ans = C(x+y, x).
+
+18. Total number of paths from point P(x1, y1) to point Q(x2, y2)
+where x2 >= x1 and y2 >= y1 without crossing the line X = Y + c :
+Let x = x2 - x1 and y = y2 - y1. Then ans = C(x+y, x) - C(x+y, x+c-1).
+Special Case : x = n, y = n, c = 0, then ans = C(2n, n) - C(2n, n-1) [Catalan Number]
+
+19. Catalan triangle : Total number of permutation having n X and k Y so that Count(X)-Count(Y)>=0 in any prefix (Non-negative Partial Sum) :
+ans =  C(n+k,k) - C(n+k, k-1)
+
+20. Catalan trapezoid : Total number of permutation having n X and k Y so that Count(Y) - Count(X) < m in any prefix, then :
+when 0 <= k < m, ans = C(n+k,k)
+when m <= k <= n+m-1, ans = C(n+k,k) - C(n+k,k-m)
+when k > n+m-1, ans = 0
+
+21. Eulerian number of the first kind :
+A1(n,k) is the number of permutations of 1 to n in which exactly k elements are greater than their previous element.
+Then : A1(n,k) = (n-k) * A1(n-1,k-1) + (k+1) * A1(n-1,k).
+
+22. Eulerian number of the second kind :
+Number of permutations of the multiset {1,1,2,2,..,n,n} such that for each k, all the numbers appearing 
+between the two occurrences of k are greater than k = (2n - 1)!
+A2(n,m) is the number of such permutations with m ascents.
+Then : A2(n,m) = (2n-m-1) * A2(n-1, m-1) + (m+1) * A2(n-1,m)
+[ex: 332211: 0 ascent, 233211: 1 ascent, 112233: 2 ascents]
+
+23. In 2-SAT: A, A' mustn’t be in the same SCC.
+(A│B)=TRUE is eqv to (A' => B)&(B' => A).
+
+24. #pragma GCC optimize("Ofast,unroll-loops")
+#pragma GCC target("avx,avx2,fma") //gcc optimization
+
+25. checker.sh: run "bash checker.sh" (For comparing outputs of two codes on the generated cases)
+for((i = 1; ; ++i)); do
+	echo $i
+	./gen $i > int
+	diff -w <(./a < int) <(./brute < int) || break
+done
+
+26. Pick's Theorem: A = I + (B/2) -1
+A = Area of Polygon, B = Number of integral points on edges of polygon, I = Number of integral points strictly inside the polygon
