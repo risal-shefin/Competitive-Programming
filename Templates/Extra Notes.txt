@@ -7,7 +7,7 @@
 3. গুণোত্তর ধারা: nতম পদ=ar^(n-1), sum=(a(r^n-1))/(r-1)
 
 4. Catalan Numbers: 1, 1, 2, 5, 14, 42, 132…..
-    Cn = (2n)!/(n+1)!n! ; n >= 0
+    Cn = (2n)!/((n+1)!n!) ; n >= 0
     
 5. Suppose, there are n unlabelled objects to be placed into k bins, ways= (n-1)C(k-1)
 
@@ -36,7 +36,6 @@
 14. Parity of Str2(n,k) : ((n-k) & Floor((k-1)/2))==0)
 
 15. Ways to partition n labelled objects into k unlabelled subsets, with each subset containing 
-
 at least r elements : SR(n,k) = k * SR(n-1,k) + C(n-1,r-1) * SR(n-r,k-1)
 
 16. Number of ways to partition n labelled objects 1,2,3, ... n into k non-empty subsets 
@@ -79,8 +78,8 @@ Then : A2(n,m) = (2n-m-1) * A2(n-1, m-1) + (m+1) * A2(n-1,m)
 25. checker.sh: run "bash checker.sh" (For comparing outputs of two codes on the generated cases)
 for((i = 1; ; ++i)); do
 	echo $i
-	./gen $i > int
-	diff -w <(./a < int) <(./brute < int) || break
+	./gen.exe $i > int
+	diff -w <(./a.exe < int) <(./brute.exe < int) || break
 done
 
 26. Pick's Theorem: A = I + (B/2) -1
