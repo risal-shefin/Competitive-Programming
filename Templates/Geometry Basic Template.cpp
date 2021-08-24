@@ -5,6 +5,8 @@ point rotate(point p, point c, double theta) {
     return point(p.x*cos(rad) - p.y*sin(rad) + c.x,
                  p.x*sin(rad) + p.y*cos(rad) + c.y);
 }
+// in 3D, to rotate a vector v by θ angle around a unit vector k describing the axis/line,
+v_rot=vcosθ+(k×v)sinθ+k(k.v)(1-cosθ) 
 
 /* Line Template Starts */
 struct line { double a, b, c; }; // ax + by + c = 0
