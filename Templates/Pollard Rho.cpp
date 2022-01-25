@@ -1,25 +1,26 @@
-ll pollard_rho(ll n)  //pollard rho implementation
+/// find any divisor of (n) in ˜O(n^(1/4))
+ll pollard_rho(ll n)
 {
-    if(n % 2==0)
-        return 2;
-
-    ll x = rand() % n + 1;
-    ll c = rand() % n + 1;
-    ll y = x;
-    ll d = 1;
-
-    //fn is f(x) = x*x + c
-    while(d==1)
-    {
-        x = ((x * x) % n + c) % n;
-        y = ((y * y) % n + c) % n;
-        y = ((y * y) % n + c) % n;
-
-        d = __gcd(abs(x-y),n);
+    if (n <= 1) return 1;
+    if (isPrime(n)) return n;
+ 
+    ll d = n;
+    for (ll c = 2; d == n; ++c)
+    {    
+        ll x = 2, y = 2, i = 2, k = 2;
+        while (true)
+        {
+            x = (mulmod(x, x, n) + c);
+            if (x >= n)	x -= n;
+            d = __gcd(abs(x - y), n);
+            if (d > 1 && n % d == 0) break;
+            if (i++ == k) y = x, k <<= 1;
+        }
     }
-
-    return d != n? d: pollard_rho(n);
+ 
+    return d;
 }
 
-/// srand(time(NULL);   // setting seed for rand() at the start of main function
-/// long long divisor = pollard_rho(n);   // to find one (any) divisor of n
+// isPrime(n) -> use Miller-Rabin or similar efficient primality test
+// mulmod(a,b,m) -> compute (a*b)%m without overflow
+// long long divisor = pollard_rho(n);   // to find one (any) divisor of n
