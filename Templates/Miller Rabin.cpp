@@ -26,6 +26,7 @@ ll fastPow(ll x, ll n, ll MOD)
     return ret % MOD;
 }
 
+const int a[9] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
 bool isPrime(ll n)
 {
     if(n == 2 || n == 3) return true;
@@ -38,7 +39,6 @@ bool isPrime(ll n)
         d /= 2;
     }
 
-    int a[9] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
     for(int i = 0; i < 9; i++)
     {
         if(n == a[i]) return true;
