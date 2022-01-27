@@ -9,6 +9,10 @@ const ll multiplier[] = {1, 3, 5, 7, 11, 13,
 #define nelems(x) (sizeof(x) / sizeof((x)[0]))
 ll SQUFOF( ll N )
 {
+    if(N%2==0) return 2;
+    for(int k = 1; k <= 5; ++k) if(N%multiplier[k]==0)
+        return multiplier[k];
+    
     ll D, Po, P, Pprev, Q, Qprev, q, b, r, s;
     ll L, B, i;
     s = (ll)(sqrtl(N)+0.5);
