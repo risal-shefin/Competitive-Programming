@@ -51,6 +51,7 @@ void buildSA() {
         for (i = 0; i < n; i++)
             // update the rank array RA
             RA[i] = tempRA[i];
+        
         if (RA[SA[n - 1]] == n - 1) break;
         // nice optimization trick
     }
