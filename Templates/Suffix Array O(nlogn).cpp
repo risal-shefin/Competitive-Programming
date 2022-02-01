@@ -75,9 +75,9 @@ void buildLCP() {
         // L decreased max n times
     }
     for (i = 0; i < n; i++)
-    // compute LCP in O(n)
-    LCP[i] = PLCP[SA[i]];
-    // put the permuted LCP to the correct position
+        // compute LCP in O(n)
+        LCP[i] = PLCP[SA[i]];
+        // put the permuted LCP to the correct position
 }
 // n = string length + 1
 // s = the string
