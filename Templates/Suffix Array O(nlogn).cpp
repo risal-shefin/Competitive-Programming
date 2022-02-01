@@ -24,8 +24,9 @@ void countingSort(int k) {    // O(n)
         int t = c[i]; c[i] = sum; sum += t;
     }
     for (i = 0; i < n; i++)
-    // shuffle the suffix array if necessary
-    tempSA[c[SA[i] + k < n ? RA[SA[i] + k] : 0]++] = SA[i];
+        // shuffle the suffix array if necessary
+        tempSA[c[SA[i] + k < n ? RA[SA[i] + k] : 0]++] = SA[i];
+    
     for (i = 0; i < n; i++)
         // update the suffix array SA
         SA[i] = tempSA[i];
