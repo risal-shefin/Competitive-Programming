@@ -1,13 +1,13 @@
 struct line {
-    ll m, c;
+    ll m, c; //y=mx+c
     line(ll x, ll y) {
-        m = x, c = y;
+        m = x, c = y; 
     }
 };
 
 struct CHT {
     vector < line > vec;
-    ll t, ptr;
+    ll t, ptr; // t=type of the CHT
     void init(ll x) {
         t = x, ptr = 0;
         vec.clear();
@@ -21,10 +21,10 @@ struct CHT {
         __int128 b = (f2.c - f1.c);
         b = b * (f1.m - f3.m);
 
-        if(t == 1) return a <= b;
-        if(t == 2) return a >= b;
-        if(t == 3) return a >= b;
-        if(t == 4) return a <= b;
+        if(t == 1) return a <= b; //max m1>=m2
+        if(t == 2) return a >= b; //min m1<=m2
+        if(t == 3) return a >= b; //max m1<=m2
+        if(t == 4) return a <= b; //min m1>=m2
         assert(0);
     }
     void add(line x) {
