@@ -1,8 +1,8 @@
 // For Maximum Bipartite Matching
 // Complexity: O(min(n*m, n^3))
 
-ll n, k; // n = left part size, k = right part size;
-vector <ll> g[1500], lft, rgt;
+ll l_siz, r_siz; // l_siz = left part size, r_siz = right part size;
+vector <ll> g[sz*sz], lft, rgt;
 vector <bool> used;
 
 bool try_kuhn(ll v)
@@ -21,9 +21,9 @@ bool try_kuhn(ll v)
 
 void kuhn()
 {
-    lft.assign(n+1, -1), rgt.assign(k+1, -1);
-    for(ll v=1; v<=n; ++v) {
-        used.assign(k+1, false);
+    lft.assign(l_siz+1, -1), rgt.assign(r_siz+1, -1);
+    for(ll v=1; v<=l_siz; ++v) {
+        used.assign(r_siz+1, false);
         try_kuhn(v);
     }
 }
