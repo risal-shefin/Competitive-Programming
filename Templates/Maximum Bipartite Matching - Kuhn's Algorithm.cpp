@@ -1,4 +1,4 @@
-// For Maximum Bipartitie Matching
+// For Maximum Bipartite Matching
 // Complexity: O(min(n*m, n^3))
 
 ll n, k; // n = left part size, k = right part size;
