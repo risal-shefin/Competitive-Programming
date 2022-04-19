@@ -19,11 +19,13 @@ bool try_kuhn(ll v)
     return false;
 }
 
-void kuhn()
+ll kuhn()
 {
+    ll max_match = 0;
     lft.assign(l_siz+1, -1), rgt.assign(r_siz+1, -1);
     for(ll v=1; v<=l_siz; ++v) {
         used.assign(r_siz+1, false);
-        try_kuhn(v);
+        max_match += try_kuhn(v);
     }
+    return max_match;
 }
