@@ -2,7 +2,7 @@
 // Complexity: O(min(n*m, n^3))
 
 ll l_siz, r_siz; // l_siz = left part size, r_siz = right part size;
-vector <ll> g[sz*sz], lft, rgt;
+vector <ll> g[1500], lft, rgt;
 vector <bool> used;
 
 bool try_kuhn(ll v)
