@@ -52,7 +52,7 @@ struct MatExpo
                         
                         for(ll k = 0; k < col; k++) {
                             tmp += mat[i][k] * exponents[p][k][j];
-                            while(tmp >= MOD2) /// Taking modulo MOD2 is easy, because we can do it by subtraction
+                            while(tmp >= MOD2) /// Taking modulo MOD2 is faster, because we can do it by subtraction
                                 tmp -= MOD2;
                         }
                         
