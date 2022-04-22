@@ -6,8 +6,8 @@ const ll MOD2 = MOD * MOD;   /// Only when (MOD * MOD) fits into long long
 #define row 2
 #define col 2
 ll exponents[64][row][col];
-ll ident[row][col] = { {1, 0}, {0, 1} };  /// Identity Matrix
-ll base[row][col] = { {1, 1}, {1, 0} };
+ll ident[row][col] = { {1, 0}, {0, 1} };  // Identity Matrix
+ll base[row][col] = { {1, 1}, {1, 0} };   // Base Matrix
 ll result[row][col], mat[row][col];
 
 struct MatExpo
@@ -64,7 +64,7 @@ struct MatExpo
             }
         }
 
-        return (result[0][0] + result[0][1]) % MOD;
+        return (result[0][0] + result[0][1]) % MOD;  // result[0][0]*f(1) + result[0][1]*f(0). f(1) = f(0) = 1.
     }
 };
 
