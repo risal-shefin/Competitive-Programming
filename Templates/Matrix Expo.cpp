@@ -40,7 +40,7 @@ struct MatExpo
         if(m == 0 || m == 1)
             return 1;
 
-        memcpy(mat, ident, sizeof(ident));
+        memcpy(mat, ident, sizeof(ident)); // Copy identity matrix to mat
         
         ll n = m - 1;   /// Here, (n - 1)th power of base matrix represents the mth term
         for(ll p = 60; p >= 0; p--) {
@@ -60,7 +60,7 @@ struct MatExpo
                     }
                 }
 
-                memcpy(mat, result, sizeof(result));
+                memcpy(mat, result, sizeof(result)); // // Copy result matrix to mat
             }
         }
 
