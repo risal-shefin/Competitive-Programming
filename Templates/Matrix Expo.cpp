@@ -1,8 +1,8 @@
-
 // fibonacci sequence {1, 1, 2.....} here. So,f(1)=f(0)=1.
 #define ll long long
 const ll MOD = 1e9 + 7;
 const ll MOD2 = MOD * MOD;   /// Only when (MOD * MOD) fits into long long
+
 #define row 2
 #define col 2
 ll exponents[64][row][col];
