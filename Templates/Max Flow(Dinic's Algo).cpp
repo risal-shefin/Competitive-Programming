@@ -78,7 +78,7 @@ ll maxFlow(ll _src, ll _dest)
     while (dinic_bfs())
     {
         fill(work, work + nodes, 0);
-        while (ll delta = dinic_dfs(src, INT_MAX))
+        while (ll delta = dinic_dfs(src, inf))
             result += delta;
     }
     return result;
