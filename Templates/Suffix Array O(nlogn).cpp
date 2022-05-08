@@ -1,17 +1,13 @@
+// O(n log n) Suffix Array
 #define MAX_N 1000020
 int n, t;
-char s[500099];
+char s[MAX_N];
 int SA[MAX_N], LCP[MAX_N];
 int RA[MAX_N], tempRA[MAX_N];
 int tempSA[MAX_N];
 int c[MAX_N];
 int Phi[MAX_N], PLCP[MAX_N];
-// second approach: O(n log n)
-// the input string, up to 100K characters
-// the length of input string
-// rank array and temporary rank array
-// suffix array and temporary suffix array
-// for counting/radix sort
+
 void countingSort(int k) {    // O(n)
     int i, sum, maxi = max(300, n);
     // up to 255 ASCII chars or length of n
