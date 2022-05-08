@@ -36,11 +36,10 @@ ll kuhn2()
     ll max_match = 0;
     lft.assign(l_siz+1, -1), rgt.assign(r_siz+1, -1);
     
-    vector <ll> lft_part;
-    for(ll v=1; v<=l_siz; ++v) lft_part.push_back(v);
-    
     // Shuffle the left part randomly to traverse them randomly
     mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count()); // Random Seed
+    vector <ll> lft_part;
+    for(ll v=1; v<=l_siz; ++v) lft_part.push_back(v);
     shuffle(lft_part.begin(), lft_part.end(), rng);
     
     // Greedy matching with adjacent nodes at first
@@ -60,8 +59,8 @@ ll kuhn2()
     // Main Kuhn's Algorithm Part
     bool new_mat = 1;
     while(new_mat) {
-        // used is cleared one time in each iteration so that
-        // we can find several paths in O(E).
+        // used is cleared one time in each iteration so that we can find several
+        // matchings in O(E). This makes the whole algorithm significantly faster.
         used.assign(r_siz+1, false);
         // If no new match is found, the loop will break
         new_mat = 0;
@@ -74,6 +73,6 @@ ll kuhn2()
             max_match += got, new_mat |= got;
         }
     }
-    
     return max_match;
 }
+
