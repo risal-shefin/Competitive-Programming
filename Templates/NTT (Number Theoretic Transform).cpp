@@ -3,7 +3,7 @@ Iterative Implementation of Number Theoretic Transform
 Complexity: O(N log N)
 Slower than regular fft
 Possible Optimizations:
-1. Remove leading zeroes
+1. Remove trailing zeroes
 2. Keep the mod const
 
 Suggested mods (mod, root, inv, pw) :
