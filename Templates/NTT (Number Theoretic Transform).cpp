@@ -121,10 +121,10 @@ int power(int a, int p, int mod) {
     return ans;
 }
 /** Find primitive root of p assuming p is prime.
-if not, we must add calculation of phi(p)
+if not, we must add calculation of phi(p).
 Complexity : O(Ans * log (phi(n)) * log n + sqrt(p)) (if exists)
              O(p * log (phi(n)) * log n + sqrt(p))   (if does not exist)
-Returns -1 if not found
+Returns -1 if not found.
 */
 int primitive_root(int p) {
     if (p == 2) return 1;
@@ -148,12 +148,12 @@ int primitive_root(int p) {
     return -1;
 }
 /**
-  Generates necessary info for NTT (for offline usage :3)
-  returns maximum k such that 2^k divides mod
-  ntt can only be applied for arrays not larger than this size
+  Generates necessary info for NTT (for offline usage :3).
+  Returns maximum k such that 2^k % mod = 1,
+  NTT can only be applied for arrays not larger than this size.
   mod MUST BE PRIME!!!!!
-  We use that fact that primes the form p=c*2^k+1,
-  there always exist the 2^k-th root of unity.
+  We use the fact that if primes have the form p=c*2^k+1,
+  there always exists the 2^k-th root of unity.
   It can be shown that g^c is such a 2^k-th root
   of unity, where g is a primitive root of p.
 */
