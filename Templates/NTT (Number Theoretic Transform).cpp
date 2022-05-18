@@ -89,6 +89,9 @@ namespace ntt {
 
     vector<int> multiply(vector<int> a, vector<int> b) {
         int n = 1;
+        while(a.back() == 0 && !a.empty()) a.pop_back();
+        while(b.back() == 0 && !b.empty()) b.pop_back();
+        
         while (n < a.size()+ b.size())  n<<=1;
         a.resize(n), b.resize(n);
 
@@ -162,6 +165,7 @@ int nttdata(int mod, int &root, int &inv, int &pw) {
     while (n%2 == 0) c++, n/=2;
     pw = (mod-1)/n;
     int g = primitive_root(mod);
+    if(g == -1) return -1; // No primitive root exists
     root = power(g, n, mod);
     inv = power(root, mod-2, mod);
     return c;
