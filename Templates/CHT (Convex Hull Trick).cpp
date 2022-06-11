@@ -1,7 +1,7 @@
 struct line {
-    ll m, c;
-    line(ll x, ll y) {
-        m = x, c = y;
+    ll m, c; // y = mx+c
+    line(ll _m, ll _c) {
+        m = _m, c = _c;
     }
 };
 
@@ -21,10 +21,10 @@ struct CHT {
         __int128 b = (f2.c - f1.c);
         b = b * (f1.m - f3.m);
 
-        if(t == 1) return a <= b;
-        if(t == 2) return a >= b;
-        if(t == 3) return a >= b;
-        if(t == 4) return a <= b;
+        if(t == 1) return a <= b; // m_i > m_i+1. min query.
+        if(t == 2) return a >= b; // m_i > m_i+1. max query.
+        if(t == 3) return a >= b; // m_i < m_i+1. min query.
+        if(t == 4) return a <= b; // m_i < m_i+1. max query.
         assert(0);
     }
     void add(line x) {
