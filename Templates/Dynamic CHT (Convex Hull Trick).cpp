@@ -9,7 +9,6 @@
  * Time: O(\log N)
  * Status: stress-tested
  */
-
 struct Line {
 	mutable ll m, c, p;
 	bool isQuery;
