@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define ll long long
-#define pb push_back
-
 /* Operations:
  * 1 u x : set val[u] = x
  * 2 u v : sum of val[i] in (u,v) path
