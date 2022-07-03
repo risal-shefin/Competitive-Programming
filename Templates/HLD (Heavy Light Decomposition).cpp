@@ -92,19 +92,17 @@ void upd_val(ll u, ll val) {
 ll query_path(ll u, ll v)
 {
     ll ret = 0;
-    while(true){
-        if(isAncestor(head[u],v)) break;
+    while(!isAncestor(head[u],v)) {
         ret += query(1,tim, in[head[u]], in[u], 1);
         u=par[head[u]];
     }
     swap(u,v);
-    while(true){
-        if(isAncestor(head[u],v)) break;
+    while(!isAncestor(head[u],v)) {
         ret += query(1,tim, in[head[u]], in[u], 1);
         u=par[head[u]];
     }
     if(in[v]<in[u])swap(u,v);
-    ret += query(1,tim, in[u], in[v], 1);
+    ret += query(1,tim, in[u], in[v], 1); // u is LCA
     return ret;
 }
 
