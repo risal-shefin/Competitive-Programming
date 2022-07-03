@@ -7,7 +7,7 @@ const int MAXN = 40005;
 const int MAXM = 100005;
 const int LN = 19;
 
-int N, M, K, cur, A[MAXN], LVL[MAXN], DP[LN][MAXN];
+int N, M, K, cur, A[MAXN], LVL[MAXN], pa[LN][MAXN];
 int BL[MAXN << 1], ID[MAXN << 1], VAL[MAXN], ANS[MAXM];
 int d[MAXN], l[MAXN], r[MAXN];
 bool VIS[MAXN];
@@ -29,44 +29,33 @@ struct query
 } Q[MAXM];
 
 // Set up Stuff
-void dfs(int u, int par)
+void dfs(int u, int par, int d)
 {
-    l[u] = ++cur;
-    ID[cur] = u;
-    for (int i = 1; i < LN; i++)
-        DP[i][u] = DP[i - 1][DP[i - 1][u]];
-    for (int i = 0; i < graph[u].size(); i++)
+    l[u] = ++cur, ID[cur] = u;
+    pa[0][u] = par, LVL[u] = d;
+    for (auto &v : graph[u])
     {
-        int v = graph[u][i];
         if (v == par)
             continue;
-        LVL[v] = LVL[u] + 1;
-        DP[0][v] = u;
-        dfs(v, u);
+        dfs(v, u, d+1);
     }
-    r[u] = ++cur;
-    ID[cur] = u;
+    r[u] = ++cur, ID[cur] = u;
 }
 
-// Function returns lca of (u) and (v)
-inline int lca(int u, int v)
+// Function returns lca of u and v
+int LCA(int u, int v)
 {
-    if (LVL[u] > LVL[v])
-        swap(u, v);
-    for (int i = LN - 1; i >= 0; i--)
-        if (LVL[v] - (1 << i) >= LVL[u])
-            v = DP[i][v];
-    if (u == v)
-        return u;
-    for (int i = LN - 1; i >= 0; i--)
-    {
-        if (DP[i][u] != DP[i][v])
-        {
-            u = DP[i][u];
-            v = DP[i][v];
+    if(LVL[u] < LVL[v]) swap(u,v);
+    int diff = LVL[u] - LVL[v];
+    for(int i = 0; i < LN; i++) if( (diff>>i)&1 ) u = pa[i][u];
+    if(u == v) return u;
+    for(int i = LN-1; i >= 0; i--) {
+        if(pa[i][u] != pa[i][v]) {
+            u = pa[i][u];
+            v = pa[i][v];
         }
     }
-    return DP[0][u];
+    return pa[0][u];
 }
 
 inline void check(int x, int& res)
@@ -117,29 +106,34 @@ void compute()
         printf("%d\n", ANS[i]);
 }
 
+void init(int N) {
+    cur = 0;
+    for (int i = 1; i <= N; i++) {
+        graph[i].clear();
+        VIS[i] = VAL[i] = 0;
+        for(int j=0; j<LN; j++) pa[j][i] = -1;
+    }
+}
+
 int main()
 {
 
     int u, v, x;
 
     scanf("%d %d", &N, &M);
-
-    cur = 0;
-    memset(VIS, 0, sizeof(VIS));
-    memset(VAL, 0, sizeof(VAL));
-    for (int i = 1; i <= N; i++)
-        graph[i].clear();
+    init(N);
 
     // Inputting Values
-    for (int i = 1; i <= N; i++)
+    for (int i = 1; i <= N; i++) {
         scanf("%d", &A[i]);
-    memcpy(d + 1, A + 1, sizeof(int) * N);
+        d[i] = A[i];
+    }
 
     // Compressing Coordinates
     sort(d + 1, d + N + 1);
     K = unique(d + 1, d + N + 1) - d - 1;
     for (int i = 1; i <= N; i++)
-        A[i] = lower_bound(d + 1, d + K + 1, A[i]) - d;
+        A[i] = upper_bound(d + 1, d + K + 1, A[i]) - d;
 
     // Inputting Tree
     for (int i = 1; i < N; i++)
@@ -149,9 +143,13 @@ int main()
         graph[v].push_back(u);
     }
 
-    // Preprocess
-    DP[0][1] = 1;
-    dfs(1, -1);
+    dfs(1, -1, 0);
+    // Build Sparse Table
+    for(int i=1; i<LN; i++)
+        for(int j=1; j<=N; j++)
+            if(pa[i-1][j] != -1)
+                pa[i][j] = pa[i-1][pa[i-1][j]];
+
     int size = sqrt(cur);
 
     for (int i = 1; i <= cur; i++)
@@ -160,7 +158,7 @@ int main()
     for (int i = 0; i < M; i++)
     {
         scanf("%d %d", &u, &v);
-        Q[i].lc = lca(u, v);
+        Q[i].lc = LCA(u, v);
         if (l[u] > l[v])
             swap(u, v);
         if (Q[i].lc == u)
@@ -173,4 +171,3 @@ int main()
     sort(Q, Q + M);
     compute();
 }
-
