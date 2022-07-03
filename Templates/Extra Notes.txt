@@ -86,4 +86,4 @@ done
 A = Area of Polygon, B = Number of integral points on edges of polygon, I = Number of integral points strictly inside the polygon
 
 27. Sum of i^2 from 1 to n = n*(n+1)*(2n+1)/6. // 1+4+16+...+n^2
-
+28. Sum of i^3 from 1 to n = n^2 * (n+1)^2 / 4. // 1+8+27+...+n^3
