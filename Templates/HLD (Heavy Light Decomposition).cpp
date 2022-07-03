@@ -1,3 +1,9 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pb push_back
+
 /* Operations:
  * 1 u x : set val[u] = x
  * 2 u v : sum of val[i] in (u,v) path
@@ -7,16 +13,16 @@
 #define pb push_back
 const ll sz = 3e4 + 10, LN = 16, root = 1;
 vector <ll> g[sz];
-ll sub[sz], in[sz], out[sz], head[sz], depth[sz], tim;
-ll pa[LN][sz], tr[4*sz];
+ll sub[sz], in[sz], out[sz], head[sz], tim;
+ll par[sz], tr[4*sz];
 
-void dfs_siz(ll u, ll p, ll d)
+void dfs_siz(ll u, ll p)
 {
-    depth[u] = d, sub[u] = 1, pa[0][u] = p;
+    sub[u] = 1, par[u] = p;
     for(ll &v : g[u]) {
         if(v == p)
             continue;
-        dfs_siz(v, u, d+1);
+        dfs_siz(v, u);
         sub[u] += sub[v];
         if(sub[v] > sub[ g[u][0] ])
             swap(v, g[u][0]);
@@ -42,21 +48,7 @@ void dfs_hld(ll u, ll p)
     out[u] = tim;
 }
 
-ll LCA(ll u, ll v)
-{
-    if(depth[u] < depth[v]) swap(u,v);
-    ll diff = depth[u] - depth[v];
-    for(ll i = 0; i < LN; i++) if( (diff>>i)&1 ) u = pa[i][u];
-    if(u == v) return u;
-    for(ll i = LN-1; i >= 0; i--) {
-        if(pa[i][u] != pa[i][v]) {
-            u = pa[i][u];
-            v = pa[i][v];
-        }
-    }
-    return pa[0][u];
-}
-
+// Typical Segment Tree on [1, tim] range
 void build(ll lo, ll hi, ll node)
 {
     if(lo == hi) {
@@ -93,39 +85,39 @@ ll query(ll lo, ll hi, ll l, ll r, ll node)
     return query(lo, mid, l, r, lft)
         +  query(mid+1, hi, l, r, rgt);
 }
+// Segment Tree Ends
+
+inline bool isAncestor(int p,int u){
+    return in[p]<=in[u]&&out[p]>=out[u];
+}
 
 void upd_val(ll u, ll val) {
     update(1, tim, in[u], val, 1);
 }
 
-ll query_chain(ll lca, ll u)
-{
-    ll h = -1, ret = 0;
-    while(h != lca) {
-        h = head[u];
-        if(depth[h] < depth[lca]) h = lca;
-
-        ret += query(1, tim, in[h], in[u], 1);
-        u = pa[0][h];
-    }
-    return ret;
-}
-
 ll query_path(ll u, ll v)
 {
-    ll lca = LCA(u, v);
-    ll ret = query_chain(lca, u)+query_chain(lca, v);
-
-    // lca is counted twice. So, subtraction is needed.
-    ret -= query_chain(lca, lca);
+    ll ret = 0;
+    while(true){
+        if(isAncestor(head[u],v)) break;
+        ret += query(1,tim, in[head[u]], in[u], 1);
+        u=par[head[u]];
+    }
+    swap(u,v);
+    while(true){
+        if(isAncestor(head[u],v)) break;
+        ret += query(1,tim, in[head[u]], in[u], 1);
+        u=par[head[u]];
+    }
+    if(in[v]<in[u])swap(u,v);
+    ret += query(1,tim, in[u], in[v], 1);
     return ret;
 }
+
 void clr(ll n) {
     tim = 0;
-    for(ll i=1; i <=n; i++) {
+    for(ll i=1; i <=n; i++)
         g[i].clear();
-        for(ll j=0; j<LN; j++) pa[j][i] = -1;
-    }
 }
 int main()
 {
@@ -139,14 +131,9 @@ int main()
             g[u].pb(v), g[v].pb(u);
         }
 
-        dfs_siz(root, -1, 0);
+        dfs_siz(root, -1);
         dfs_hld(root, -1);
         build(1, tim, 1);
-
-        for(int i=1; i<LN; i++)
-            for(int j=1; j<=n; j++)
-                if(pa[i-1][j] != -1)
-                    pa[i][j] = pa[i-1][pa[i-1][j]];
 
         scanf("%lld", &q);
         while(q--) {
