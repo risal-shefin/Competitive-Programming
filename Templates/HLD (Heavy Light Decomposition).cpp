@@ -5,7 +5,7 @@
 
 #define ll long long
 #define pb push_back
-const ll sz = 3e4 + 10, LN = 16, root = 1;
+const ll sz = 3e4 + 10;
 vector <ll> g[sz];
 ll sub[sz], in[sz], out[sz], head[sz], tim;
 ll par[sz], tr[4*sz];
@@ -31,7 +31,7 @@ void dfs_siz(ll u, ll p)
 */
 void dfs_hld(ll u, ll p)
 {
-    if(u == root) head[u] = root;
+    if(p == -1) head[u] = u; // root
     in[u] = ++tim;
     for(ll &v : g[u]) {
         if(v == p)
