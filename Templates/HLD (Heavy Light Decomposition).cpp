@@ -113,7 +113,7 @@ void clr(ll n) {
 }
 int main()
 {
-    ll t, n, q, u, v, op;
+    ll t, n, q, u, v, op, root=1;
     cin >> t;
     while(t--) {
         scanf("%lld", &n); clr(n);
