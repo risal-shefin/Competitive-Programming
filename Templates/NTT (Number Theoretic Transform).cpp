@@ -16,7 +16,8 @@ Suggested mods (mod, root, inv, pw) :
 998244353, 15311432, 469870224, 1<<23
 167772161, 243, 114609789, 1<<25
 469762049, 2187, 410692747, 1<<26
-If required mod is not above, use nttdata function OFFLINE
+If required mod is not above, use nttdata function OFFLINE.
+If pw=1<<k, a polynomial can have at most (1<<k) degree.
 **/
 #include<bits/stdc++.h>
 using namespace std;
