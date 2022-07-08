@@ -8,8 +8,8 @@ const int MAXM = 100005;
 const int LN = 19;
 
 int N, M, K, cur, A[MAXN], LVL[MAXN], pa[LN][MAXN];
-int BL[MAXN << 1], ID[MAXN << 1], VAL[MAXN], ANS[MAXM];
-int d[MAXN], l[MAXN], r[MAXN];
+int BL[MAXN << 1], ID[MAXN << 1], FREQ[MAXN], ANS[MAXM];
+int d[MAXN], in[MAXN], out[MAXN];
 bool VIS[MAXN];
 vector < int > graph[MAXN];
 
@@ -31,7 +31,7 @@ struct query
 // Set up Stuff
 void dfs(int u, int par, int d)
 {
-    l[u] = ++cur, ID[cur] = u;
+    in[u] = ++cur, ID[cur] = u;
     pa[0][u] = par, LVL[u] = d;
     for (auto &v : graph[u])
     {
@@ -39,7 +39,7 @@ void dfs(int u, int par, int d)
             continue;
         dfs(v, u, d+1);
     }
-    r[u] = ++cur, ID[cur] = u;
+    out[u] = ++cur, ID[cur] = u;
 }
 
 // Function returns lca of u and v
@@ -62,11 +62,11 @@ inline void check(int x, int& res)
 {
     // If (x) occurs twice, then don't consider it's value
     if(VIS[x]) {
-        if(--VAL[A[x]] == 0)
+        if(--FREQ[A[x]] == 0)
             res--;
     }
     else if(!VIS[x]) {
-        if(VAL[A[x]]++ == 0)
+        if(FREQ[A[x]]++ == 0)
             res++;
     }
     VIS[x] ^= 1;
@@ -110,7 +110,7 @@ void init(int N) {
     cur = 0;
     for (int i = 1; i <= N; i++) {
         graph[i].clear();
-        VIS[i] = VAL[i] = 0;
+        VIS[i] = FREQ[i] = 0;
         for(int j=0; j<LN; j++) pa[j][i] = -1;
     }
 }
@@ -159,12 +159,12 @@ int main()
     {
         scanf("%d %d", &u, &v);
         Q[i].lc = LCA(u, v);
-        if (l[u] > l[v])
+        if (in[u] > in[v])
             swap(u, v);
         if (Q[i].lc == u)
-            Q[i].l = l[u], Q[i].r = l[v];
+            Q[i].l = in[u], Q[i].r = in[v];
         else
-            Q[i].l = r[u], Q[i].r = l[v];
+            Q[i].l = out[u], Q[i].r = in[v];
         Q[i].id = i;
     }
 
