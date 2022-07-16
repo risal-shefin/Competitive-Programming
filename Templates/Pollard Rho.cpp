@@ -1,26 +1,38 @@
 /// find any divisor of (n) in ˜O(n^(1/4))
-ll pollard_rho(ll n)
-{
-    if (n <= 1) return 1;
-    if (isPrime(n)) return n;
- 
-    ll d = n;
-    for (ll c = 2; d == n; ++c)
-    {    
-        ll x = 2, y = 2, i = 2, k = 2;
-        while (true)
-        {
-            x = (mulmod(x, x, n) + c);
-            if (x >= n)	x -= n;
-            d = __gcd(abs(x - y), n);
-            if (d > 1 && n % d == 0) break;
-            if (i++ == k) y = x, k <<= 1;
+namespace PollardRho {
+    mt19937 rnd(chrono::steady_clock::now().time_since_epoch().count());
+    const int P = 1e6 + 9;
+    ll seq[P];
+
+    inline ll add_mod(ll x, ll y, ll m) {
+        return (x += y) < m ? x : x - m;
+    }
+    inline ll mul_mod(ll x, ll y, ll m) {
+        return (__int128)x*y % m;
+    }
+
+    ll pollard_rho(ll n) {
+        if(n<=1) return 1;
+        if(isPrime(n)) return n;
+        while (1) {
+            ll x = rnd() % n, y = x, c = rnd() % n, u = 1, v, t = 0;
+            ll *px = seq, *py = seq;
+            while (1) {
+                *py++ = y = add_mod(mul_mod(y, y, n), c, n);
+                *py++ = y = add_mod(mul_mod(y, y, n), c, n);
+                if ((x = *px++) == y) break;
+                v = u;
+                u = mul_mod(u, abs(y - x), n);
+                if (!u) __gcd(v, n);
+                if (++t == 32) {
+                    t = 0;
+                    if ((u = __gcd(u, n)) > 1 && u < n) return u;
+                }
+            }
+            if (t && (u = __gcd(u, n)) > 1 && u < n) return u;
         }
     }
- 
-    return d;
 }
 
 // isPrime(n) -> use Miller-Rabin or similar efficient primality test
-// mulmod(a,b,m) -> compute (a*b)%m without overflow
-// long long divisor = pollard_rho(n);   // to find one (any) divisor of n
+// long long divisor = PollardRho::pollard_rho(n);   // to find one (any) divisor of n
