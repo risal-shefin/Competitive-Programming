@@ -120,7 +120,7 @@ int getLineCircleIntersection (Point p, Point q, Circle O, double& t1, double& t
     double e = a*a+c*c, f = 2*(a*b+c*d), g = b*b+d*d-O.r*O.r;
     double delta = f*f - 4*e*g;
     if (delta < -EPS) return 0;
-    if (abs(delta)<EPS) {
+    if (abs(delta)<=EPS) {
         t1 = t2 = -f / (2 * e);
         sol.push_back(p + v * t1);
         return 1;
@@ -137,8 +137,8 @@ vec ccw(vec a, double co, double si) {return vec(a.x*co-a.y*si, a.y*co+a.x*si);}
 vec cw (vec a, double co, double si) {return vec(a.x*co+a.y*si, a.y*co-a.x*si);}
 int getCircleCircleIntersection (Circle o1, Circle o2, vector<Point>& sol) {
     double d = getLength(o1.o - o2.o);
-    if (abs(d)<EPS) {
-        if (abs(o1.r - o2.r)<EPS) return -1;
+    if (abs(d)<=EPS) {
+        if (abs(o1.r - o2.r)<=EPS) return -1;
         return 0;
     }
     if ((o1.r + o2.r - d) < -EPS) return 0;
