@@ -112,6 +112,25 @@ bool circle2PtsRad(point p1, point p2, double r, point &c) {
     return true;
 } // to get the other center, reverse p1 and p2
 
+// Line-Circle Intersection
+int getLineCircleIntersection (Point p, Point q, Circle O, double& t1, double& t2, vector<Point>& sol) {
+    vec v = q - p;
+    //sol.clear();
+    double a = v.x, b = p.x - O.o.x, c = v.y, d = p.y - O.o.y;
+    double e = a*a+c*c, f = 2*(a*b+c*d), g = b*b+d*d-O.r*O.r;
+    double delta = f*f - 4*e*g;
+    if (delta < -EPS) return 0;
+    if (abs(delta)<EPS) {
+        t1 = t2 = -f / (2 * e);
+        sol.push_back(p + v * t1);
+        return 1;
+    }
+
+    t1 = (-f - sqrt(delta)) / (2 * e); sol.push_back(p + v * t1);
+    t2 = (-f + sqrt(delta)) / (2 * e); sol.push_back(p + v * t2);
+    return 2;
+}
+
 // Circle-Circle Intersection
 double getLength (vec a) { return sqrt(dot(a, a)); }
 vec ccw(vec a, double co, double si) {return vec(a.x*co-a.y*si, a.y*co+a.x*si);}
