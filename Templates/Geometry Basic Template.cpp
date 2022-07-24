@@ -111,6 +111,31 @@ bool circle2PtsRad(point p1, point p2, double r, point &c) {
     c.y = (p1.y + p2.y) * 0.5 + (p2.x - p1.x) * h;
     return true;
 } // to get the other center, reverse p1 and p2
+
+// Circle-Circle Intersection
+double getLength (vec a) { return sqrt(dot(a, a)); }
+vec ccw(vec a, double co, double si) {return vec(a.x*co-a.y*si, a.y*co+a.x*si);}
+vec cw (vec a, double co, double si) {return vec(a.x*co+a.y*si, a.y*co-a.x*si);}
+int getCircleCircleIntersection (Circle o1, Circle o2, vector<Point>& sol) {
+    double d = getLength(o1.o - o2.o);
+    if (abs(d)<EPS) {
+        if (abs(o1.r - o2.r)<EPS) return -1;
+        return 0;
+    }
+    if ((o1.r + o2.r - d) < -EPS) return 0;
+    if ((fabs(o1.r-o2.r) - d) > EPS) return 0;
+
+    vec v = o2.o - o1.o; // obj.o is the center point
+    double co = (o1.r*o1.r + getPLength(v) - o2.r*o2.r) / (2 * o1.r * getLength(v));
+    double si = sqrt(fabs(1.0 - co*co));
+    Point p1 = scale(cw(v,co, si), o1.r) + o1.o;
+    Point p2 = scale(ccw(v,co, si), o1.r) + o1.o;
+
+    sol.push_back(p1);
+    if (p1 == p2) return 1;
+    sol.push_back(p2);
+    return 2;
+}
 /* Circle Template Ends */
 
 /* Triangle Template Starts */
@@ -138,5 +163,10 @@ int inCircle(point p1, point p2, point p3, point &ctr, double &r)
     pointsToLine(p2, p, l2);
     areIntersect(l1, l2, ctr); // get their intersection point
     return 1;
+}
+bool pointInTriangle(Point a, Point b, Point c, Point p){
+     double s1 = getArea(a,b,c);
+     double s2 = getArea(p,b,c) + getArea(p,a,b) + getArea(p,c,a);
+     return abs(s1-s2)<EPS;
 }
 /* Triangle Template Ends */
