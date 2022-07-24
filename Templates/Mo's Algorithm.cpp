@@ -100,3 +100,21 @@ int main()
 
     return 0;
 }
+/* To handle updates:
+// Block Size = (2*n*n)^(1/3). Complexity: O(n*n^(2/3))
+// qry[i].t = count of updates before this query
+// in doUpdate(), you’ve to either perform an update or revert the update based on the status of this update.
+ll curl = 0, curr = 0, unow = -1;
+for(ll i = 0; i < q; i++) {
+    while(unow < qry[i].t ) {
+        unow++;
+        doUpdate(unow);
+    }
+    while(unow > qry[i].t) {
+        doUpdate(unow);
+        unow--;
+    }
+    // Mo’s typical add,del, ans calc etc. part here
+}
+*/
+
