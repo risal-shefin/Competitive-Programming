@@ -103,6 +103,14 @@ int main()
 /* To handle updates:
 // Block Size = (2*n*n)^(1/3). Complexity: O(n*n^(2/3))
 // qry[i].t = count of updates before this query
+Comparator:
+const bool operator <(const query &a, const query &b) {
+    if(a.l / block != b.l / block) return a.l < b.l;
+    const ll tmp2 = a.r/block;
+    if(tmp2 != b.r/block) return a.r < b.r;
+    if(tmp2 & 1) return a.t < b.t;
+    return a.t > b.t;
+}
 // in doUpdate(), you’ve to either perform an update or revert the update based on the status of this update.
 ll curl = 0, curr = 0, unow = -1;
 for(ll i = 0; i < q; i++) {
