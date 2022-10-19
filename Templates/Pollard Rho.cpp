@@ -13,6 +13,7 @@ namespace PollardRho {
 
     ll pollard_rho(ll n) {
         if(n<=1) return 1;
+        if(!(n&1)) return 2;
         if(isPrime(n)) return n;
         while (1) {
             ll x = rnd() % n, y = x, c = rnd() % n, u = 1, v, t = 0;
