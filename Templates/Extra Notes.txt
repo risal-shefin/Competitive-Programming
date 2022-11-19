@@ -89,3 +89,11 @@ A = Area of Polygon, B = Number of integral points on edges of polygon, I = Numb
 28. Sum of i^3 from 1 to n = n^2 * (n+1)^2 / 4. // 1+8+27+...+n^3
 29. (a+b)^n = Sum of nCk*(a^n)*(b^(n-k)) for k in range [0, n]
 30. nCr mod p = Product of (n_i C r_i) mod p for k in range [0, k], where n = n_0 * p^0 + .... + n_k * p^k, r  = r_0 * p^0 + ... + r_k * p^k are the base p expansions of n and r respectively. (Lucas Theorem)
+
+31. Python Fast I/O:
+import io, os, sys
+input=io.BytesIO(os.read(0,os.fstat(0).st_size)).
+readline
+a,b = map(int, input().decode())
+sys.stdout.write(str(n)+"\n")
+sys.stdout.write(" ".join(map(str, li))+"\n")
