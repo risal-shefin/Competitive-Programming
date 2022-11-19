@@ -92,8 +92,7 @@ A = Area of Polygon, B = Number of integral points on edges of polygon, I = Numb
 
 31. Python Fast I/O:
 import io, os, sys
-input=io.BytesIO(os.read(0,os.fstat(0).st_size)).
-readline
+input=io.BytesIO(os.read(0,os.fstat(0).st_size)).readline
 a,b = map(int, input().decode())
 sys.stdout.write(str(n)+"\n")
 sys.stdout.write(" ".join(map(str, li))+"\n")
