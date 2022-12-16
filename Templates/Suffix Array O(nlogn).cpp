@@ -3,7 +3,7 @@
 int n, t;
 char s[MAX_N];
 int SA[MAX_N], LCP[MAX_N];
-int RA[MAX_N], tempRA[MAX_N];
+int RA[2*MAX_N], tempRA[MAX_N];
 int tempSA[MAX_N];
 int c[MAX_N];
 int Phi[MAX_N], PLCP[MAX_N];
@@ -30,7 +30,7 @@ void countingSort(int k) {    // O(n)
 
 void buildSA() {
     int i, k, r;
-    for (i = 0; i < n; i++) RA[i] = s[i];
+    for (i = 0; i < 2*n; i++) RA[i] = i<n? s[i] : 0;
     // initial rankings
     for (i = 0; i < n; i++) SA[i] = i;
     // initial SA: {0, 1, 2, ..., n-1}
