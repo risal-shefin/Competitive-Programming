@@ -1,3 +1,4 @@
+// Reference: https://github.com/ShahjalalShohag/code-library/blob/main/Number%20Theory/Pollard%20Rho.cpp
 /// find any divisor of (n) in ˜O(n^(1/4))
 namespace PollardRho {
     mt19937 rnd(chrono::steady_clock::now().time_since_epoch().count());
@@ -24,7 +25,7 @@ namespace PollardRho {
                 if ((x = *px++) == y) break;
                 v = u;
                 u = mul_mod(u, abs(y - x), n);
-                if (!u) __gcd(v, n);
+                if (!u) return __gcd(v, n);
                 if (++t == 32) {
                     t = 0;
                     if ((u = __gcd(u, n)) > 1 && u < n) return u;
